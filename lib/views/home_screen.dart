@@ -21,6 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool onDetail = false;
 
   final PageController pageController = PageController(viewportFraction: 0.8);
+  final PageController characterController = PageController(
+    viewportFraction: 0.9,
+  );
   final ValueNotifier<double> _scroll = ValueNotifier(0.0);
 
   @override
@@ -31,6 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
     pageController.addListener(() {
       if (pageController.page == null) return;
       _scroll.value = pageController.page!;
+
+      /* 너무 미세함 
+        characterController.animateTo(
+        pageController.position.pixels,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ); */
+
+      final int targetPage = pageController.page!.round();
+
+      if (characterController.hasClients &&
+          characterController.page?.round() != targetPage) {
+        characterController.animateToPage(
+          targetPage,
+          duration: 200.ms,
+          curve: Curves.easeOut,
+        );
+      }
     });
   }
 
@@ -43,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     pageController.dispose();
+    characterController.dispose();
     super.dispose();
   }
 
@@ -85,13 +107,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ).animateY(
                 onDetail: onDetail,
                 begin: 0,
-                end: 0.23,
+                end: 0.34,
                 duration: 500,
               ),
               Center(
                 child: CharacterView(
+                  characterController: characterController,
                   imageUrls:
                       snapshot.data!.map((e) => e.characterImageUrl).toList(),
+                ).animateY(
+                  onDetail: onDetail,
+                  begin: 0,
+                  end: 1.4,
+                  duration: 500,
                 ),
               ),
             ],
@@ -113,7 +141,7 @@ extension _AnimateY on Widget {
       begin: begin,
       end: end,
       duration: duration.milliseconds,
-      curve: Curves.easeInCubic,
+      // curve: Curves.easeInCubic,
     );
   }
 }

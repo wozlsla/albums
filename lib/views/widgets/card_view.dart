@@ -3,6 +3,7 @@ import 'package:albums/views/widgets/card_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 
 class CardView extends StatelessWidget {
   final List<CharacterModel> characters;
@@ -65,6 +66,17 @@ class CardView extends StatelessWidget {
                           child: Text(
                             character.worldName,
                             style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Positioned(
+                          left: 80,
+                          top: 20,
+                          child: Lottie.asset(
+                            "assets/lottie/flare.json",
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
+                            // repeat: true,
                           ),
                         ),
                         Positioned(
