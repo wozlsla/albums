@@ -2,6 +2,7 @@ import 'package:albums/models/character_model.dart';
 import 'package:albums/repos/character_repo.dart';
 import 'package:albums/views/widgets/background_switcher.dart';
 import 'package:albums/views/widgets/card_view.dart';
+import 'package:albums/views/widgets/character_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -85,6 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 begin: 0,
                 end: 0.23,
                 duration: 600,
+              ),
+              Center(
+                child: CharacterView(
+                  imageUrls:
+                      snapshot.data!.map((e) => e.characterImageUrl).toList(),
+                ),
               ),
             ],
           );

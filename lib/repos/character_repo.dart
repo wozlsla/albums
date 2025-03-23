@@ -11,9 +11,9 @@ class CharacterRepository {
   final List<String> characterNames = [
     "뿌꾸리꼬순내",
     "새짐니",
-    "꾸꾸리꼬릿내",
-    "꾹꾸리꼬신내",
-    "북꾸리꼬린내",
+    // "꾸꾸리꼬릿내",
+    // "꾹꾸리꼬신내",
+    // "메점",
   ];
 
   // OCID(캐릭터 식별자) 조회

@@ -47,68 +47,65 @@ class CardView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(height: 30),
                     IconButton(
                       onPressed: toggleDetail,
-                      icon: FaIcon(FontAwesomeIcons.chevronUp),
+                      icon:
+                          onDetail
+                              ? FaIcon(FontAwesomeIcons.chevronDown)
+                              : FaIcon(FontAwesomeIcons.chevronUp),
                     ),
+                    SizedBox(height: 10),
                     Stack(
                       children: [
                         CardBorder(),
-                        Column(
-                          children: [
-                            Image.network(
-                              character.characterImageUrl,
-                              height: 150,
-                              scale: 0.5,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Icon(
-                                  Icons.error,
-                                  size: 100,
-                                  color: Colors.red,
-                                );
-                              },
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      character.characterName,
-                                      style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                        Positioned(
+                          top: 16,
+                          left: 16,
+                          child: Text(
+                            character.worldName,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 16,
+                          left: 16,
+                          right: 16, // 오른쪽 제약 - Row가 전체 너비 사용하게 함
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    character.characterName,
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    Text(
-                                      character.characterClass,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                // Text(
-                                //   character.worldName,
-                                //   style: TextStyle(fontSize: 16),
-                                // ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "${character.characterLevel} ",
-                                      style: TextStyle(fontSize: 24),
-                                    ),
-                                    Text(
-                                      "Level ",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
+                                  ),
+                                  Text(
+                                    character.characterClass,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "${character.characterLevel} ",
+                                    style: TextStyle(fontSize: 24),
+                                  ),
+                                  Text(
+                                    "Level ",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
                   ],
                 ),
               ),
