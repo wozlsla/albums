@@ -1,4 +1,5 @@
 import 'package:albums/models/character_model.dart';
+import 'package:albums/models/stat_model.dart';
 import 'package:albums/repos/character_repo.dart';
 import 'package:albums/views/detail_screen.dart';
 import 'package:albums/views/widgets/background_switcher.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final CharacterRepository _repository = CharacterRepository();
   late Future<List<CharacterModel>> _charactersInfo;
+  final Map<String, CharacterStatModel> _statCache = {};
 
   int currentPage = 0;
   bool onDetail = false;
@@ -62,6 +64,25 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _loadStat(String ocid) async {
+    if (_statCache.containsKey(ocid)) return; // 이미 있으면 패스
+
+    try {
+      final stat = await _repository.fetchCharacterStat(ocid);
+      setState(() {
+        _statCache[ocid] = stat;
+      });
+    } catch (e) {
+      print("[Stat 요청 실패] $e");
+    }
+  }
+
+  void _handleToggleDetail(List<CharacterModel> characters) {
+    final ocid = characters[currentPage].ocid;
+    _loadStat(ocid); // stat 로딩 트리거
+    setState(() => onDetail = !onDetail);
+  }
+
   @override
   void dispose() {
     pageController.dispose();
@@ -103,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onDetail: onDetail,
                 scroll: _scroll,
                 onPageChanged: (value) => setState(() => currentPage = value),
-                toggleDetail: () => setState(() => onDetail = !onDetail),
+                toggleDetail: () => _handleToggleDetail(snapshot.data!),
                 characters: snapshot.data!,
               ).animateY(
                 onDetail: onDetail,
@@ -126,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
               DetailScreen(
                 index: currentPage,
                 characters: snapshot.data!,
+                stat: _statCache[snapshot.data![currentPage].ocid],
               ).animateY(onDetail: onDetail, begin: -1, end: 0),
             ],
           );
