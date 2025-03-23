@@ -4,26 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class BackgroundSwitcher extends StatelessWidget {
-  final int currentPage;
+  final int index;
 
-  const BackgroundSwitcher({super.key, required this.currentPage});
+  const BackgroundSwitcher({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: 500.ms,
       child: SizedBox(
-        key: ValueKey(currentPage),
+        key: ValueKey(index),
         child: Stack(
           children: [
             Align(
               alignment: Alignment(0, -0.8),
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Image.asset("assets/covers/${currentPage + 1}.jpg"),
+                child: Image.asset("assets/covers/${index + 1}.jpg"),
               ),
               /* Image.asset(
-                "assets/covers/${currentPage + 1}.jpg",
+                "assets/covers/${index + 1}.jpg",
                 fit: BoxFit.contain,
                 // alignment: Alignment.topCenter,
               ), */

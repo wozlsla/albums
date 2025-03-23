@@ -1,5 +1,6 @@
 import 'package:albums/models/character_model.dart';
 import 'package:albums/repos/character_repo.dart';
+import 'package:albums/views/detail_screen.dart';
 import 'package:albums/views/widgets/background_switcher.dart';
 import 'package:albums/views/widgets/card_view.dart';
 import 'package:albums/views/widgets/character_view.dart';
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return Stack(
             children: [
-              BackgroundSwitcher(currentPage: currentPage),
+              BackgroundSwitcher(index: currentPage),
               CardView(
                 pageController: pageController,
                 onDetail: onDetail,
@@ -122,6 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   duration: 500,
                 ),
               ),
+              DetailScreen(
+                index: currentPage,
+                characters: snapshot.data!,
+              ).animateY(onDetail: onDetail, begin: -1, end: 0),
             ],
           );
         },

@@ -1,4 +1,5 @@
 class CharacterModel {
+  final String ocid;
   final String characterName;
   final String worldName;
   final String characterClass;
@@ -6,6 +7,7 @@ class CharacterModel {
   final String characterImageUrl;
 
   CharacterModel({
+    required this.ocid,
     required this.characterName,
     required this.worldName,
     required this.characterClass,
@@ -13,8 +15,9 @@ class CharacterModel {
     required this.characterImageUrl,
   });
 
-  factory CharacterModel.fromJson(Map<String, dynamic> json) {
+  factory CharacterModel.fromJson(Map<String, dynamic> json, String ocid) {
     return CharacterModel(
+      ocid: ocid,
       characterName: json["character_name"] ?? "Unknown",
       worldName: json["world_name"] ?? "Unknown",
       characterClass: json["character_class"] ?? "Unknown",
