@@ -67,6 +67,7 @@ flutter:
   assets:
     - .env
     - assets/covers/
+    - assets/items/
     - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see

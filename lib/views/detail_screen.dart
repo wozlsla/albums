@@ -1,8 +1,17 @@
 import 'package:albums/models/character_model.dart';
 import 'package:albums/models/stat_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class DetailScreen extends StatelessWidget {
+  static const Set<String> importantStats = {
+    "보스 몬스터 데미지",
+    "방어율 무시",
+    "최종 데미지",
+    "크리티컬 확률",
+    "크리티컬 데미지",
+  };
+
   final int index;
   final List<CharacterModel> characters;
   final CharacterStatModel? stat;
@@ -34,18 +43,32 @@ class DetailScreen extends StatelessWidget {
       child: ListView(
         children: [
           Center(
-            child: Text(
-              "직업: ${stat.characterClass}",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
+            child: AnimatedOpacity(
+              opacity: 0.9,
+              duration: 900.ms,
+              child: Text(
+                "직업: ${stat.characterClass}",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    BoxShadow(
+                      blurRadius: 30,
+                      color: Colors.deepOrange.withValues(alpha: 0.8),
+                      spreadRadius: 2,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ).animate().flipH(duration: 1500.ms),
           ),
           const SizedBox(height: 20),
-          ...stat.stats.map(
-            (s) => Padding(
+          ...stat.stats.map((s) {
+            final isImportant = importantStats.contains(s.name);
+
+            return Padding(
               padding: const EdgeInsets.symmetric(vertical: 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,9 +77,12 @@ class DetailScreen extends StatelessWidget {
                     child: Text(
                       s.name,
                       style: TextStyle(
-                        color: Colors.white60,
+                        color:
+                            isImportant
+                                ? Colors.orange.shade600.withValues(alpha: 0.7)
+                                : Colors.white60,
                         fontSize: 19,
-                        // fontWeight: FontWeight.w600,
+                        fontWeight: isImportant ? FontWeight.w600 : null,
                       ),
                     ),
                   ),
@@ -69,8 +95,8 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

@@ -9,8 +9,19 @@ class CardBorder extends StatelessWidget {
       height: 380,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.orange.shade600, width: 1.5),
+        border: Border.all(
+          color: Colors.orange.shade600.withValues(alpha: 0.5),
+          width: 2,
+        ),
         borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.amber.withValues(alpha: 0.2),
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(13.5),

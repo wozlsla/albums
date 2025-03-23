@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
+final Map<String, String> world = {
+  "루나": "luna", "오로라": "aurora",
+  // ...
+};
+
 class CardView extends StatelessWidget {
   final List<CharacterModel> characters;
   final PageController pageController;
@@ -61,12 +66,19 @@ class CardView extends StatelessWidget {
                       children: [
                         CardBorder(),
                         Positioned(
-                          top: 16,
-                          left: 16,
-                          child: Text(
-                            character.worldName,
-                            style: TextStyle(fontSize: 16),
-                          ),
+                          top: 2,
+                          left: 4,
+                          child:
+                              world.containsKey(character.worldName)
+                                  ? Image.asset(
+                                    "assets/items/${world[character.worldName]}.jpg",
+                                    width: 60,
+                                    height: 60,
+                                  )
+                                  : Text(
+                                    character.worldName,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                         ),
                         Positioned(
                           left: 80,
@@ -81,10 +93,11 @@ class CardView extends StatelessWidget {
                         ),
                         Positioned(
                           bottom: 16,
-                          left: 16,
-                          right: 16, // 오른쪽 제약 - Row가 전체 너비 사용하게 함
+                          left: 18,
+                          right: 18, // 오른쪽 제약 - Row가 전체 너비 사용하게 함
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,19 +113,29 @@ class CardView extends StatelessWidget {
                                     character.characterClass == "블래스터"
                                         ? "린"
                                         : character.characterClass,
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.grey.shade500,
+                                    ),
                                   ),
                                 ],
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     "${character.characterLevel} ",
-                                    style: TextStyle(fontSize: 24),
+                                    style: TextStyle(
+                                      fontSize: 38,
+                                      color: Colors.red.shade400,
+                                    ),
                                   ),
                                   Text(
                                     "Level ",
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.red.shade400,
+                                    ),
                                   ),
                                 ],
                               ),

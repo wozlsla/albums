@@ -7,6 +7,7 @@ import 'package:albums/views/widgets/card_view.dart';
 import 'package:albums/views/widgets/character_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

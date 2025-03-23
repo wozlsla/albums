@@ -12,9 +12,9 @@ class CharacterRepository {
   final List<String> characterNames = [
     "뿌꾸리꼬순내",
     "새짐니",
-    // "꾸꾸리꼬릿내",
-    // "깅현", // o
-    // "알갱모르갱", // o
+    "꾸꾸리꼬릿내",
+    "깅현", // o
+    "알갱모르갱", // o
     // "꾹꾸리꼬신내",
   ];
 
