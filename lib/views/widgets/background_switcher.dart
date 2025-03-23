@@ -12,21 +12,31 @@ class BackgroundSwitcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: 500.ms,
-      child: Transform.translate(
-        offset: Offset(0, -180),
-        child: Container(
-          key: ValueKey(currentPage),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/covers/${currentPage + 1}.jpg"),
-              // image: AssetImage("assets/covers/${currentPage + 1}.webp"),
-              fit: BoxFit.contain,
+      child: SizedBox(
+        key: ValueKey(currentPage),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment(0, -0.8),
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Image.asset("assets/covers/${currentPage + 1}.jpg"),
+              ),
+              /* Image.asset(
+                "assets/covers/${currentPage + 1}.jpg",
+                fit: BoxFit.contain,
+                // alignment: Alignment.topCenter,
+              ), */
             ),
-          ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-            child: Container(color: Colors.black.withValues(alpha: 0.5)),
-          ),
+            /* BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                color: Colors.black.withValues(alpha: 0.5),
+              ),
+            ), // 1번 blur 튐 */
+            Container(color: Colors.black.withValues(alpha: 0.5)),
+          ],
         ),
       ),
     );

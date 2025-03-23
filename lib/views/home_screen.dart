@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: FutureBuilder<List<CharacterModel>>(
         future: _charactersInfo,
         builder: (context, snapshot) {
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onDetail: onDetail,
                 begin: 0,
                 end: 0.23,
-                duration: 600,
+                duration: 500,
               ),
               Center(
                 child: CharacterView(

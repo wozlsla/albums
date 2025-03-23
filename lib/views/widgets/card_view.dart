@@ -75,6 +75,7 @@ class CardView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     character.characterName,
@@ -84,7 +85,9 @@ class CardView extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    character.characterClass,
+                                    character.characterClass == "블래스터"
+                                        ? "린"
+                                        : character.characterClass,
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ],
